@@ -1,0 +1,22 @@
+{
+  "name": "qa-automation-playwright-cucumber",
+  "version": "1.0.0",
+  "description": "QA Automation challenge using Playwright and Cucumber",
+  "type": "module",
+  "scripts": {
+    "test": "cucumber-js",
+    "test:headed": "cucumber-js --world-parameters '{\"headless\": false}'",
+    "test:pw": "playwright test",
+    "allure:generate": "allure generate ./allure-results -o ./allure-report --clean",
+    "allure:open": "allure open ./allure-report"
+  },
+  "dependencies": {
+    "@cucumber/cucumber": "^10.0.0",
+    "playwright": "^1.42.0"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.45.0",
+    "allure-commandline": "^2.36.0",
+    "allure-playwright": "^3.4.5"
+  }
+}
