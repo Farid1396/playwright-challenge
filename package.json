@@ -8,7 +8,10 @@
     "test:headed": "cucumber-js --world-parameters '{\"headless\": false}'",
     "test:pw": "playwright test",
     "allure:generate": "allure generate ./allure-results -o ./allure-report --clean",
-    "allure:open": "allure open ./allure-report"
+    "allure:open": "allure open ./allure-report",
+    "test:chromium": "BROWSER=chromium cucumber-js",
+    "test:firefox": "BROWSER=firefox cucumber-js",
+    "test:webkit": "BROWSER=webkit cucumber-js"
   },
   "dependencies": {
     "@cucumber/cucumber": "^10.0.0",

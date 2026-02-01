@@ -12,3 +12,8 @@ Scenario: Invalid user cannot login
   Given the user is on the SauceDemo login page
   When the user logs in with invalid credentials
   Then an error message should be displayed
+
+Scenario: Invalid login
+  Given the user is on the login page
+  When the user logs in as "invalid_user"
+  Then an error message should be displayed

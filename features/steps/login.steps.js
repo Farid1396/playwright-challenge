@@ -1,9 +1,14 @@
-//import { expect } from '@playwright/test';
 import { Given, When, Then } from '@cucumber/cucumber';
 import { LoginPage } from '../pages/LoginPage.js';
 import { ProductsPage } from '../pages/ProductsPage.js';
 import { BASE_URL, STANDARD_USER } from '../../config/env.js';
 import { users } from '../data/users.js';
+import { getUser } from '../utils/dataHelper.js';
+
+When('the user logs in as {string}', async function (userType) {
+  const user = getUser(userType);
+  await this.loginPage.login(user.username, user.password);
+});
 
 Given('the user is on the SauceDemo login page', async function () {
   this.loginPage = new LoginPage(this.page);

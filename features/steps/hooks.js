@@ -1,16 +1,29 @@
 import { Before, After } from '@cucumber/cucumber';
-import { chromium } from '@playwright/test';
+import { chromium, firefox, webkit } from 'playwright';
 
-let browser;
-let page;
+const browsers = {
+  chromium,
+  firefox,
+  webkit
+};
 
 Before(async function () {
-  browser = await chromium.launch({ headless: false });
-  const context = await browser.newContext();
-  page = await context.newPage();
-  this.page = page;
+  const browserType = process.env.BROWSER || 'chromium';
+
+  this.browser = await browsers[browserType].launch({ headless: false });
+  this.context = await this.browser.newContext();
+  this.page = await this.context.newPage();
 });
 
 After(async function () {
-  await browser.close();
+  await this.page.close();
+  await this.context.close();
+  await this.browser.close();
+});
+
+After(async function (scenario) {
+  if (scenario.result.status === 'FAILED') {
+    const screenshot = await this.page.screenshot();
+    await this.attach(screenshot, 'image/png');
+  }
 });

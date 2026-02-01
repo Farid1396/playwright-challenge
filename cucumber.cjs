@@ -8,7 +8,8 @@ module.exports = {
       'features/**/*.feature'
     ],
     format: [
-      'progress'
+      'progress',
+      'allure-cucumberjs'
     ]
   }
 };

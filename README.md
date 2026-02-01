@@ -108,14 +108,55 @@ Esto permite evaluar:
 - Assertions claras
 - Estabilidad del framework
 
-## 🚀 Posibles Mejoras
-Con más tiempo, el proyecto podría extenderse con:
-- 🔁 Ejecución paralela y multi-browser
-- 📊 Reportes avanzados (Allure / HTML)
-- 🧪 Manejo de data más robusto (JSON / fixtures)
-- ⚠️ Mayor cobertura de edge cases
-- 🔄 Integración CI/CD (GitHub Actions)
-- 📸 Screenshots y videos en fallos
+## 🌐 Multi-Browser Execution
+
+El framework soporta ejecución en múltiples navegadores:
+
+- Chromium
+- Firefox
+- WebKit
+
+Ejemplo:
+```bash
+BROWSER=firefox npm test
+```
+
+## 📊 Reportes
+
+El proyecto utiliza **Allure Report** para visualizar resultados de ejecución.
+
+Incluye:
+- Escenarios ejecutados
+- Evidencias visuales
+- Screenshots en fallos
+- Videos (si aplica)
+
+### Generar reporte
+```bash
+npm run report:generate
+npm run report:open
+```
+
+## 🔄 CI/CD
+
+El proyecto cuenta con integración CI/CD usando **GitHub Actions**.
+
+El pipeline:
+- Ejecuta los tests automáticamente en cada PR
+- Corre en múltiples navegadores
+- Genera reportes Allure
+- Publica evidencias como artefactos
+
+Esto permite detectar fallos de forma temprana y mantener la calidad del código.
+
+## 🗂️ Manejo de Data
+
+El proyecto utiliza data externa en formato JSON para manejar usuarios y credenciales.
+
+Esto permite:
+- Separar datos de la lógica de tests
+- Facilitar el data-driven testing
+- Escalar escenarios sin modificar steps
 
 ## 👤 Autor
 ### Farid Atala
