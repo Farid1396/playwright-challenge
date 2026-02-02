@@ -1,4 +1,4 @@
-module.exports = {
+export default {
   default: {
     require: [
       'features/steps/**/*.js',
@@ -6,7 +6,7 @@ module.exports = {
     ],
     format: [
       'progress',
-      'allure-cucumberjs'
+      './node_modules/allure-cucumberjs'
     ]
   }
 };

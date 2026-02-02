@@ -5,6 +5,12 @@ import { BASE_URL, STANDARD_USER } from '../../config/env.js';
 import { users } from '../data/users.js';
 import { getUser } from '../utils/dataHelper.js';
 
+Given('the user is on the login page', async function () {
+  this.loginPage = new LoginPage(this.page);
+  this.productsPage = new ProductsPage(this.page);
+  await this.loginPage.navigate(BASE_URL);
+});
+
 When('the user logs in as {string}', async function (userType) {
   const user = getUser(userType);
   await this.loginPage.login(user.username, user.password);

@@ -1,4 +1,8 @@
-import users from '../data/users.json' assert { type: 'json' };
+import fs from 'fs';
+import path from 'path';
+
+const dataPath = path.resolve('features/data/users.json');
+const users = JSON.parse(fs.readFileSync(dataPath, 'utf-8'));
 
 export function getUser(userType) {
   if (!users[userType]) {
