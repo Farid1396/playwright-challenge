@@ -1,16 +1,17 @@
-name: QA Automation - Playwright + Cucumber
+name: Playwright Tests
 
 on:
   push:
-    branches: [ main ]
+    branches: [ main, develop ]
   pull_request:
-    branches: [ main ]
+    branches: [ main, develop ]
 
 jobs:
-  e2e-tests:
+  tests:
     runs-on: ubuntu-latest
 
     strategy:
+      fail-fast: false
       matrix:
         browser: [chromium, firefox]
 
@@ -24,19 +25,18 @@ jobs:
           node-version: 20
 
       - name: Install dependencies
-        run: npm install
+        run: npm ci
 
       - name: Install Playwright browsers
         run: npx playwright install --with-deps
 
-      - name: Run tests
-        env:
-          BROWSER: ${{ matrix.browser }}
-        run: npm test
+      - name: Run Playwright tests
+        run: npx playwright test --project=${{ matrix.browser }}
 
       - name: Generate Allure report
         if: always()
-        run: npm run report:generate
+        run: |
+          npx allure generate allure-results -o allure-report --clean
 
       - name: Upload Allure report
         if: always()

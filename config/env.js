@@ -1,6 +1,17 @@
-export const BASE_URL = 'https://www.saucedemo.com/';
+const BASE_URL = 'https://www.saucedemo.com/';
 
-export const STANDARD_USER = {
-  username: 'standard_user',
-  password: 'secret_sauce'
+const USERS = {
+  STANDARD: {
+    username: 'standard_user',
+    password: 'secret_sauce',
+  },
+  LOCKED: {
+    username: 'locked_out_user',
+    password: 'secret_sauce',
+  },
+};
+
+module.exports = {
+  BASE_URL,
+  USERS,
 };

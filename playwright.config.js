@@ -1,17 +1,20 @@
 import { defineConfig, devices } from '@playwright/test';
 
 export default defineConfig({
-  testDir: './features',
+  testDir: './tests',
+  fullyParallel: true,
   timeout: 30 * 1000,
 
   expect: {
     timeout: 5000,
   },
 
-  fullyParallel: true,
-
   retries: process.env.CI ? 1 : 0,
-  workers: process.env.CI ? 2 : undefined,
+
+  reporter: [
+    ['list'],
+    ['allure-playwright']
+  ],
 
   use: {
     baseURL: 'https://www.saucedemo.com',
@@ -21,6 +24,7 @@ export default defineConfig({
     trace: 'on-first-retry',
   },
 
+/*
   projects: [
     {
       name: 'Chromium',
@@ -30,14 +34,21 @@ export default defineConfig({
       name: 'Firefox',
       use: { ...devices['Desktop Firefox'] },
     },
-    {
-      name: 'WebKit',
-      use: { ...devices['Desktop Safari'] },
-    },
   ],
+*/
 
-  reporter: [
-  ['list'],
-  ['allure-playwright']
+  projects: [
+    {
+      name: 'setup',
+      testMatch: /.*\.setup\.js/
+    },
+    {
+      name: 'chromium',
+      use: {
+        browserName: 'chromium',
+        storageState: 'storage/auth.json'
+      },
+      dependencies: ['setup']
+    }
   ],
 });
