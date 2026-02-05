@@ -18,7 +18,7 @@ export default defineConfig({
 
   use: {
     baseURL: 'https://www.saucedemo.com',
-    headless: !!process.env.CI,
+    headless: process.env.CI ? true : false,
     screenshot: 'only-on-failure',
     video: 'retain-on-failure',
     trace: 'on-first-retry',
@@ -33,6 +33,14 @@ export default defineConfig({
       name: 'chromium',
       use: {
         browserName: 'chromium',
+        storageState: 'storage/auth.json'
+      },
+      dependencies: ['setup']
+    },
+    {
+      name: 'firefox',
+      use: {
+        browserName: 'firefox',
         storageState: 'storage/auth.json'
       },
       dependencies: ['setup']
