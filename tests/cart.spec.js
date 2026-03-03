@@ -31,7 +31,7 @@ test.describe.parallel('Flujo del carrito', () => {
     await productsPage.logout();
   });
 
-  test.describe('Regresion', () => {
+  test.describe('Regression', () => {
 
     Object.values(products).forEach(product => {
       test(`Agregar ${product.name} al carrito`, async ({ loggedPage }) => {
