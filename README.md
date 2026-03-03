@@ -1,62 +1,164 @@
-🧪 QA Automation Framework — Playwright + Allure
+# 🧪 QA Automation Challenge – Playwright
 
-Framework de automatización E2E desarrollado como challenge técnico, utilizando Playwright Test, Page Object Model, fixtures reutilizables y Allure Report para trazabilidad y evidencia.
+Proyecto de automatización E2E utilizando Playwright Test, con generación de reportes en Allure y ejecución en GitHub Actions.
 
-🚀 Tech Stack
+## 📌 Stack Tecnológico
+- Node.js 20
+- Playwright Test
+- Allure Reporter
+- GitHub Actions (CI)
+- Page Object Model (POM)
+- Autenticación reutilizable con storageState
 
-Node.js
+## 📂 Estructura del Proyecto
 
-Playwright Test
-
-Allure Report
-
-JavaScript (ESM)
-
-GitHub Actions (CI/CD)
-
-📂 Project Structure
-project-root
-├── tests
+``` bash
+.
+├── tests/
+│   ├── setup/
+│   │   └── auth.setup.js
 │   ├── cart.spec.js
-│   └── fixtures
-│       └── auth.fixture.js
-├── pages
+│   └── ...
+├── pages/
 │   ├── LoginPage.js
 │   └── ProductsPage.js
-├── data
+├── data/
 │   ├── users.js
 │   └── products.js
+├── storage/
+│   └── auth.json
 ├── playwright.config.js
 ├── package.json
-└── README.md
+└── .github/workflows/playwright.yml
+```
 
-🧠 Design Decisions
+## 🚀 Instalación
 
-Page Object Model (POM)
-Encapsula lógica de UI y reduce acoplamiento entre tests y selectors.
+Clonar el repositorio:
 
-Fixtures personalizadas
-Permiten reutilizar flujos de autenticación sin duplicar pasos.
+```bash
+git clone https://github.com/Farid1396/playwright-challenge.git
+cd playwright-challenge
+```
 
-Data-driven testing
-Usuarios y productos desacoplados de los tests.
+Instalar dependencias:
 
-Allure Report
-Evidencia visual, screenshots en fallos y métricas por ejecución.
-
-CI/CD con GitHub Actions
-Ejecución automática por browser y almacenamiento de reportes.
-
-▶️ Test Execution
+```bash
 npm install
+```
+
+Instalar navegadores:
+
+```bash
 npx playwright install
+```
+
+## ▶️ Ejecución de Tests
+
+Ejecutar todos los tests
+
+```bash
 npm test
+```
 
-📊 Allure Report
+Ejecutar en modo UI
+```bash
+npm run test:ui
+```
+
+Ejecutar Smoke
+```bash
+npm run test:smoke
+```
+
+Ejecutar Regression
+```bash
+npm run test:regression
+```
+
+## 🔐 Autenticación Reutilizable
+
+Se utiliza un proyecto setup en Playwright para:
+
+1. Loguear al usuario
+
+2. Generar storage/auth.json
+
+3. Reutilizar sesión en tests dependientes
+
+Configuración en playwright.config.js:
+```js
+projects: [
+  {
+    name: 'setup',
+    testMatch: /.*\.setup\.js/
+  },
+  {
+    name: 'chromium',
+    use: {
+      browserName: 'chromium',
+      storageState: 'storage/auth.json'
+    },
+    dependencies: ['setup']
+  },
+  {
+    name: 'firefox',
+    use: {
+      browserName: 'firefox',
+      storageState: 'storage/auth.json'
+    },
+    dependencies: ['setup']
+  }
+]
+```
+
+## 📊 Reportes Allure
+
+Generar reporte:
+```bash
 npm run allure:generate
+```
+
+Abrir reporte:
+```bash
 npm run allure:open
+```
 
-🤖 CI/CD
+El reporte incluye:
+- Screenshots en fallos
+- Video en fallos
+- Trace en reintentos
+- Ejecución por navegador
 
-Los tests se ejecutan automáticamente en cada push o pull request.
-Los reportes Allure se generan y almacenan como artifacts del pipeline.
+## 🔄 CI – GitHub Actions
+
+Pipeline configurado para:
+- Instalar dependencias
+- Instalar navegadores
+- Ejecutar tests en:
+  - Chromium
+  - Firefox
+- Generar reporte Allure
+- Subir reporte como artifact
+
+Archivo:
+```bash
+.github/workflows/playwright.yml
+```
+
+## 🧠 Buenas Prácticas Implementadas
+- Page Object Model
+- Separación de data de test
+- Autenticación desacoplada
+- Configuración específica para CI (headless automático)
+- Matrix de navegadores
+- Reportería avanzada
+
+## 📈 Mejoras Futuras
+- Publicación automática de Allure en GitHub Pages
+- Persistencia de history en Allure
+- Integración con Slack o Teams
+- Dockerización del entorno
+
+## 👤 Autor
+Farid – QA Automation Engineer
