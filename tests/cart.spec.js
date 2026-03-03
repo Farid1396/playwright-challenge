@@ -3,11 +3,11 @@ import { allure } from 'allure-playwright';
 import { ProductsPage } from '../pages/ProductsPage';
 import { products } from '../data/products';
 
-test.describe.parallel('Cart flow', () => {
+test.describe.parallel('Flujo del carrito', () => {
 
   test.describe('Smoke', () => {
 
-    test('Add backpack to cart', async ({ loggedPage }) => {
+    test('Añadir mochila al carrito', async ({ loggedPage }) => {
       const productsPage = new ProductsPage(loggedPage);
 
       await productsPage.verifyPageIsDisplayed();
@@ -18,7 +18,7 @@ test.describe.parallel('Cart flow', () => {
 
   });
 
-  test('Add backpack to cart2', async ({ loggedPage }) => {
+  test('Añadir otra mochila al carrito', async ({ loggedPage }) => {
     allure.feature('Cart');
     allure.story('Add product');
     allure.severity('critical');
@@ -31,10 +31,10 @@ test.describe.parallel('Cart flow', () => {
     await productsPage.logout();
   });
 
-  test.describe('Regression', () => {
+  test.describe('Regresion', () => {
 
     Object.values(products).forEach(product => {
-      test(`Add ${product.name} to cart`, async ({ loggedPage }) => {
+      test(`Agregar ${product.name} al carrito`, async ({ loggedPage }) => {
         const productsPage = new ProductsPage(loggedPage);
 
         await productsPage.verifyPageIsDisplayed();

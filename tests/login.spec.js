@@ -3,9 +3,9 @@ import { LoginPage } from '../pages/LoginPage';
 import { ProductsPage } from '../pages/ProductsPage';
 import { users } from '../data/users';
 
-test.describe('Login flow', () => {
+test.describe('Flujo de inicio de sesión', () => {
 
-  test('User logs in with valid credentials', async ({ page }) => {
+  test('El usuario inicia sesión con credenciales válidas', async ({ page }) => {
     const loginPage = new LoginPage(page);
     const productsPage = new ProductsPage(page);
 
@@ -15,7 +15,7 @@ test.describe('Login flow', () => {
     await productsPage.verifyPageIsDisplayed();
   });
 
-  test('Invalid user cannot login', async ({ page }) => {
+  test('El usuario no válido no puede iniciar sesión', async ({ page }) => {
     const loginPage = new LoginPage(page);
 
     await loginPage.open();
